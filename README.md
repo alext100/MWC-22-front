@@ -1,29 +1,22 @@
-# mvc22front
+# MWC 22 | front
 
-## Project setup
-```
-npm install
-```
+User stories / Objetivos
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+✅ Task 1 → Formulario que permita introducir los siguientes datos: correo electrónico, nombre completo, breve descripción, país y ciudad de residencia.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+✅ Task 2 → Generar un avatar de la persona de forma aleatoria (puede ser utilizando una API, colores, etc)
 
-### Run your unit tests
-```
-npm run test:unit
-```
+✅ Task 3 → Formulario que permita introducir datos profesionales: años de experiencia, sector (Front, Back, Mobile o Data), skills: (se pueden añadir de forma libre)
 
-### Lints and fixes files
-```
-npm run lint
-```
+✅ Task 4 → Las skills salen en formato tag en alguna parte del perfil
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+✅ Task 5 → Una vista que permita ver todo el perfil de user con los datos anteriores
+
+📚 Evaluación
+Los siguientes puntos se tendrán en cuenta para la corrección:
+
+User stories (Objetivos) completados
+Estructura y calidad de código
+Documentación
+Deploy / demo de la aplicación
+Diseño y experiencia de usuario
