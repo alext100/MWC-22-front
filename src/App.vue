@@ -1,4 +1,5 @@
 <template>
+  <Header />
   <router-view v-slot="{ Component }">
     <component :is="Component" />
   </router-view>
@@ -6,9 +7,11 @@
 
 <script>
 import { defineComponent } from "vue";
+import Header from "@/components/Header.vue";
 
 export default defineComponent({
   name: "app",
+  components: { Header },
 });
 </script>
 
@@ -17,7 +20,6 @@ export default defineComponent({
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  background-color: rgb(229, 242, 253);
 }
 
 #app {
@@ -48,6 +50,6 @@ export default defineComponent({
   --error-bg-color: #fddfe2;
   --success-color: #21a67a;
   --success-bg-color: #e0eee4;
-  --bairro-alto-logo-color: #fcb73c;
+  --bg-body-color: rgb(229, 242, 253);
 }
 </style>

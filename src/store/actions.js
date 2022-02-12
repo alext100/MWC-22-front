@@ -13,6 +13,12 @@ const actions = {
     );
     commit("setCurrentUserRegisterData", userData);
   },
+
+  async deleteDataFromLocalStorage({ commit }) {
+    localStorage.removeItem("userData");
+    sessionStorage.clear();
+    commit("logoutUser");
+  },
 };
 
 export default actions;
