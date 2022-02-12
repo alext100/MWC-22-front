@@ -1,5 +1,5 @@
 <template>
-  <div class="justify-content-center nav"><router-link to="/register">Sign Up</router-link></div>
+  <div class="justify-content-center"></div>
 </template>
 
 <script>
@@ -8,3 +8,8 @@ export default {
   components: {},
 };
 </script>
+<style>
+body {
+  background-color: var(--bg-body-color);
+}
+</style>
