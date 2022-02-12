@@ -2,7 +2,7 @@
   <div class="container register__form">
     <Form
       class="shadow"
-      @submit="registerUser"
+      @submit="handleCreate"
       :validation-schema="schema"
       @invalid-submit="onInvalidSubmit"
     >
@@ -66,8 +66,7 @@
 import { Form } from "vee-validate";
 import * as Yup from "yup";
 import TextInput from "@/components/TextInput.vue";
-import { mapActions } from "vuex";
-import state from "@/store/state";
+import { mapActions, mapState } from "vuex";
 import Textarea from "../components/Textarea.vue";
 
 export default {
@@ -122,8 +121,9 @@ export default {
   },
   methods: {
     ...mapActions(["registerUser"]),
+    ...mapState(["isUserAuthenticated"]),
 
-    async handleCreate({ firstName, lastName, email, country, city, description }) {
+    handleCreate({ firstName, lastName, email, country, city, description }) {
       if (email !== "" && firstName !== "" && lastName !== "" && country !== "" && city !== "") {
         const userData = {
           firstName,
@@ -134,22 +134,18 @@ export default {
           description,
         };
 
-        try {
-          await this.registerUser(userData);
-          if (state.isRegistered === true) {
-            this.$router.push("/profesional-info");
-          }
-          this.email = "";
-          this.firstName = "";
-          this.lastName = "";
-          this.country = "";
-          this.city = "";
-          this.description = "";
-          this.isWrong = false;
-        } catch (error) {
-          this.isWrong = true;
+        this.registerUser(userData);
+        if (this.isUserAuthenticated) {
+          this.$router.push("/profesional-info");
         }
       }
+      this.email = "";
+      this.firstName = "";
+      this.lastName = "";
+      this.country = "";
+      this.city = "";
+      this.description = "";
+      this.isWrong = false;
     },
   },
 };
@@ -237,7 +233,7 @@ form {
 
 .submit-btn:hover,
 .register-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 @media (min-width: 700px) {
   form {
