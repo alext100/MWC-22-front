@@ -25,3 +25,6 @@ pnpm-debug.log*
 .vscode
 .env
 .scannerwork
+coverage
+public/b-45.jpg
+public/b-103.jpg
