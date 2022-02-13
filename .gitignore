@@ -28,3 +28,4 @@ pnpm-debug.log*
 coverage
 public/b-45.jpg
 public/b-103.jpg
+firebase-debug.log
