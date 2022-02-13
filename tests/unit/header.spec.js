@@ -27,16 +27,10 @@ describe("Given a Header.vue component ", () => {
       },
     });
     test("Then it should renders html substring and show links to the pages", () => {
-      const htmlSubstyring =
+      const htmlSubString =
         '<nav class="navbar navbar-expand-sm navbar-light bg-light header-navbar">';
 
-      expect(wrapper.html()).toContain(htmlSubstyring);
-      /*       expect(wrapper.text()).toContain("Inicio");
-      expect(wrapper.text()).toContain("Sobre el centro");
-      expect(wrapper.text()).toContain("Precios");
-      expect(wrapper.text()).toContain("Blog");
-      expect(wrapper.text()).toContain("Contactos");
-      expect(wrapper.text()).toContain("Inscribirse"); */
+      expect(wrapper.html()).toContain(htmlSubString);
     });
 
     describe("When a user click on the 'logout'", () => {
