@@ -19,6 +19,14 @@ const actions = {
     sessionStorage.clear();
     commit("logoutUser");
   },
+
+  setTechSector({ commit }, profesionalSector) {
+    commit("setTechSector", profesionalSector);
+  },
+
+  setTechSkills({ commit }, profesionalSkills) {
+    commit("setTechSkills", profesionalSkills);
+  },
 };
 
 export default actions;
