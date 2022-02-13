@@ -15,6 +15,14 @@ const mutations = {
       description: "",
     };
   },
+
+  setTechSector(state, payload) {
+    state.techSector = [...payload];
+  },
+
+  setTechSkills(state, payload) {
+    state.techSkills = [...payload];
+  },
 };
 
 export default mutations;
