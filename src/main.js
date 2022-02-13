@@ -8,5 +8,9 @@ import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "vue-next-select/dist/index.min.css";
 
-createApp({}).component("vue-select", VueNextSelect);
-createApp(App).use(store).use(router).use(BootstrapVue3).mount("#app");
+const app = createApp(App);
+app.use(store);
+app.use(router);
+app.use(BootstrapVue3);
+app.component("vue-select", VueNextSelect);
+app.mount("#app");
