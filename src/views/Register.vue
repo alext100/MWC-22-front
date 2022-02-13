@@ -154,9 +154,8 @@ export default {
 
 <style lang="scss">
 form {
-  margin-top: 30px !important;
   padding: 20px;
-  margin: 0px auto;
+  margin: 30px auto 0px auto !important;
   padding-bottom: 60px;
   border-style: ridge;
   border-radius: 15px;
