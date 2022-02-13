@@ -6,6 +6,9 @@ const state = {
   isUserAuthenticated: !!localStorage.getItem("userData"),
   techSector: [],
   techSkills: [],
+  currentUserProfesionalData: localStorage.getItem("profesionalInfo")
+    ? JSON.parse(localStorage.getItem("profesionalInfo") || "")
+    : "",
 };
 
 export default state;
