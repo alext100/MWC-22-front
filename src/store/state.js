@@ -4,6 +4,8 @@ const state = {
     : "",
 
   isUserAuthenticated: !!localStorage.getItem("userData"),
+  techSector: [],
+  techSkills: [],
 };
 
 export default state;
