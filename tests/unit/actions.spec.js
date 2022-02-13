@@ -30,3 +30,23 @@ describe("When the action registerUser is invoked", () => {
     expect(commit).toHaveBeenCalledWith("setCurrentUserRegisterData", userData);
   });
 });
+
+describe("When the action setTechSector is invoked", () => {
+  test("Then it should invoke commit with 'setTechSector'  and received data", async () => {
+    const profesionalSector = ["Front", "Back"];
+
+    await actions.setTechSector(configActionContext(commit), profesionalSector);
+
+    expect(commit).toHaveBeenCalledWith("setTechSector", profesionalSector);
+  });
+});
+
+describe("When the action setTechSkills is invoked", () => {
+  test("Then it should invoke commit with 'setTechSkills'  and received data", async () => {
+    const profesionalInfo = ["HTML", "React"];
+
+    await actions.setTechSkills(configActionContext(commit), profesionalInfo);
+
+    expect(commit).toHaveBeenCalledWith("setTechSkills", profesionalInfo);
+  });
+});
