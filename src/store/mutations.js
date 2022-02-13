@@ -4,6 +4,10 @@ const mutations = {
     state.isUserAuthenticated = true;
   },
 
+  setCurrentUserProfesionalData(state, payload) {
+    state.currentUserProfesionalData = payload;
+  },
+
   logoutUser(state) {
     state.isUserAuthenticated = false;
     state.currentUser = {
