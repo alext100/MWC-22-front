@@ -255,9 +255,8 @@ export default defineComponent({
   background-color: #effcff;
 }
 .form-container {
-  margin-top: 10px !important;
   padding: 0;
-  margin: 0px auto;
+  margin: 10px auto 0px auto !important;
   padding-bottom: 60px;
 }
 .stack__form {
@@ -272,9 +271,8 @@ export default defineComponent({
   background-color: transparent;
 }
 form {
-  margin-top: 30px !important;
   padding: 20px;
-  margin: 0px auto;
+  margin: 30px auto 0px auto !important;
   padding-bottom: 60px;
   border-style: ridge;
   border-radius: 15px;
