@@ -73,7 +73,7 @@ export default defineComponent({
 <style lang="scss">
 .textInput {
   position: relative;
-  margin-bottom: calc(1em * 1.5);
+  margin-bottom: calc(1em * 2.5);
   width: 100%;
   border-radius: 5px;
 }
@@ -102,7 +102,7 @@ input:focus {
 
 .help-message {
   position: absolute;
-  bottom: calc(-1.5 * 1em);
+  bottom: calc(-2 * 1em);
   left: 0;
   margin: 0;
   font-size: 14px;

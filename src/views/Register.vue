@@ -1,5 +1,6 @@
 <template>
   <div class="container register__form">
+    <h1 class="m-2">Register a new account</h1>
     <Form
       class="shadow"
       @submit="handleCreate"

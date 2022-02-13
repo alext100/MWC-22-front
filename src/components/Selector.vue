@@ -1,5 +1,5 @@
 <template>
-  <vue-select multiple taggable> </vue-select>
+  <vue-select multiple taggable :name="name" :id="name"> </vue-select>
 </template>
 
 <script>
@@ -11,7 +11,12 @@ export default defineComponent({
   components: {
     "vue-select": VueNextSelect,
   },
-  props: {},
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
+  },
 });
 </script>
 
