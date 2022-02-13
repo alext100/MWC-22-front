@@ -11,7 +11,8 @@
       <p class="card-text">City: {{ currentUser.city }}</p>
       <p class="card-text">Email: {{ currentUser.email }}</p>
       <p class="card-text">About you: {{ currentUser.description }}</p>
-      <template v-slot:icon><em class="fab fa-connectdevelop"></em></template>
+
+      <template v-slot:icon><img :src="avatarUrl" alt="profile-random-image" /></template>
     </full-card>
 
     <full-card type="body" class="mb-1 mt-2 mb-xl-0" bodyClasses="p-5" :shadow="true">
@@ -61,7 +62,8 @@
 <script>
 import { defineComponent } from "vue";
 import { mapState } from "vuex";
-import FullCard from "../components/FullCard.vue";
+import FullCard from "@/components/FullCard.vue";
+import getAvatar from "@/utils/getAvatar";
 
 export default defineComponent({
   name: "Profile",
@@ -69,10 +71,20 @@ export default defineComponent({
     FullCard,
   },
   data() {
-    return {};
+    return {
+      avatarUrl: null,
+    };
   },
   computed: {
     ...mapState(["currentUser", "currentUserProfesionalData"]),
+  },
+  methods: {
+    async getAvatarUrl() {
+      this.avatarUrl = await getAvatar(this.currentUser.firstName, this.currentUser.lastName);
+    },
+  },
+  async created() {
+    await this.getAvatarUrl();
   },
 });
 </script>
