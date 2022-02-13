@@ -9,6 +9,7 @@ module.exports = {
     "prettier",
     "plugin:import/errors",
     "plugin:import/warnings",
+    /* "plugin:vue/recommended", */
   ],
   parserOptions: {
     /* parser: "babel-eslint", */
