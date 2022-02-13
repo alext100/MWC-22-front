@@ -16,6 +16,7 @@ const actions = {
 
   async deleteDataFromLocalStorage({ commit }) {
     localStorage.removeItem("userData");
+    localStorage.removeItem("profesionalInfo");
     sessionStorage.clear();
     commit("logoutUser");
   },
@@ -26,6 +27,18 @@ const actions = {
 
   setTechSkills({ commit }, profesionalSkills) {
     commit("setTechSkills", profesionalSkills);
+  },
+
+  setProfesionalInfo({ commit }, profesionalInfo) {
+    localStorage.setItem(
+      "profesionalInfo",
+      JSON.stringify({
+        experience: profesionalInfo.experience,
+        techSector: profesionalInfo.techSector,
+        techSkills: profesionalInfo.techSkills,
+      })
+    );
+    commit("setCurrentUserProfesionalData", profesionalInfo);
   },
 };
 
