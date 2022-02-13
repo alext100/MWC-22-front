@@ -1,56 +1,98 @@
 <template>
-  <div class="container register__form">
-    <h1>Tell us about your experience and knowledge</h1>
-    <Form
-      class="shadow"
-      @submit="handleSaveProfesionalInfo"
-      :validation-schema="schema"
-      @invalid-submit="onInvalidSubmit"
-    >
-      <TextInput
-        :value="experience"
-        name="experience"
-        type="number"
-        label="Years of experience"
-        placeholder="Years"
-        success-message="Thank you!"
-      />
-
-      <label for="techSector">Choose your sector</label>
-      <Selector
-        name="techSector"
-        :value="techSector"
-        :options="sectors"
-        placeholder="Sector:"
-        :model-value="state.techSector"
-        @update:modelValue="onUpdateSectorValue"
-        success-message="Thank you!"
-      />
-      <label for="techSkills">Choose your skills</label>
-      <vue-select
-        name="techSkills"
-        placeholder="Skills:"
-        :options="skills"
-        multiple
-        taggable
-        group-by="isConstructor"
-        label-by="label"
-        :model-value="state.techSkills"
-        @update:modelValue="onUpdateSkillsValue"
-        value-by="value"
+  <h1>Tell us about your experience and knowledge</h1>
+  <div class="container stack__form mx-auto">
+    <div class="container form-container">
+      <Form
+        class="shadow"
+        @submit="handleSaveProfesionalInfo"
+        :validation-schema="schema"
+        @invalid-submit="onInvalidSubmit"
       >
-        <template #dropdown-item="{ option }">
-          <template v-if="option.isConstructor">
-            <div style="font-weight: 700">{{ option.label }}</div>
-          </template>
-          <template v-else>
-            <div style="color: #550685">{{ option.label }}</div>
-          </template>
-        </template>
-      </vue-select>
+        <TextInput
+          :value="experience"
+          name="experience"
+          type="number"
+          label="Years of experience"
+          placeholder="Years"
+          success-message="Thank you!"
+        />
 
-      <button class="submit-btn" type="submit">Save</button>
-    </Form>
+        <label for="techSector">Choose your sector</label>
+        <Selector
+          name="techSector"
+          :value="techSector"
+          :options="sectors"
+          placeholder="Sector:"
+          :model-value="state.techSector"
+          @update:modelValue="onUpdateSectorValue"
+          success-message="Thank you!"
+        />
+        <label for="techSkills">Choose your skills</label>
+        <vue-select
+          name="techSkills"
+          placeholder="Skills:"
+          :options="skills"
+          multiple
+          taggable
+          group-by="isConstructor"
+          label-by="label"
+          :model-value="state.techSkills"
+          @update:modelValue="onUpdateSkillsValue"
+          value-by="value"
+        >
+          <template #dropdown-item="{ option }">
+            <template v-if="option.isConstructor">
+              <div style="font-weight: 700">{{ option.label }}</div>
+            </template>
+            <template v-else>
+              <div style="color: #550685">{{ option.label }}</div>
+            </template>
+          </template>
+        </vue-select>
+
+        <button class="submit-btn" type="submit">Save</button>
+      </Form>
+    </div>
+
+    <div class="container">
+      <div class="container p-0 mt-5 ms-3">
+        <h2>Sector:</h2>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 cards-container">
+            <full-card
+              v-for="sector in techSector || []"
+              :key="sector"
+              type="body"
+              class="mb-1 mt-2 mb-xl-0 tag-card"
+              bodyClasses="py-0"
+              :shadow="true"
+              shadowSize="md"
+              :hover="true"
+              ><div class="card-text">{{ sector }}</div>
+            </full-card>
+          </div>
+        </div>
+      </div>
+
+      <div class="container p-0 mt-5 ms-3">
+        <h2>Skills:</h2>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 cards-container">
+            <full-card
+              v-for="techSkill in techSkills || []"
+              :key="techSkill"
+              type="body"
+              class="mb-1 mt-2 mb-xl-0 tag-card"
+              bodyClasses="py-0"
+              :shadow="true"
+              shadowSize="md"
+              :hover="true"
+              ><div class="card-text">{{ techSkill }}</div>
+            </full-card>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -63,6 +105,7 @@ import TextInput from "@/components/TextInput.vue";
 import { mapActions, mapState, useStore } from "vuex";
 import VueSelect from "vue-next-select";
 import Selector from "../components/Selector.vue";
+import FullCard from "../components/FullCard.vue";
 
 export default defineComponent({
   name: "ProfesionalInfo",
@@ -71,17 +114,17 @@ export default defineComponent({
     Form,
     Selector,
     VueSelect,
+    FullCard,
   },
   setup() {
     const { state, dispatch } = useStore();
-    const { techSector } = state;
     const sectors = ref(["Front", "Back", "Mobile", "Data"]);
     const options = [
       {
         name: "Front",
         skills: [
-          { name: "HTML (Hypertext Markup Language)" },
-          { name: "CSS (Cascading Style Sheets)" },
+          { name: "HTML" },
+          { name: "CSS" },
           { name: "JavaScript" },
           { name: "Angular.js" },
           { name: "React.js" },
@@ -129,8 +172,6 @@ export default defineComponent({
       },
     ];
 
-    const selectedSectors = state.techSector;
-
     const skills = ref(
       options.reduce(
         (flat, constructor) =>
@@ -170,8 +211,6 @@ export default defineComponent({
       schema,
       sectors,
       skills,
-      techSector,
-      selectedSectors,
       onInvalidSubmit,
       onUpdateSectorValue,
       onUpdateSkillsValue,
@@ -188,9 +227,11 @@ export default defineComponent({
       experience: "",
     };
   },
+  computed: {
+    ...mapState(["techSector", "techSkills"]),
+  },
   methods: {
     ...mapActions(["setProfesionalInfo"]),
-    ...mapState(["techSector", "techSkills"]),
 
     handleSaveProfesionalInfo({ experience }) {
       const profesionalInfo = {
@@ -209,7 +250,24 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.tag-card {
+  background-color: #effcff;
+}
+.form-container {
+  margin-top: 10px !important;
+  padding: 0;
+  margin: 0px auto;
+  padding-bottom: 60px;
+}
+.stack__form {
+  display: flex;
+  margin: 20px;
+}
+.stack__form .vue-select {
+  width: 100%;
+  margin-bottom: 24px;
+}
 .vue-tag {
   background-color: transparent;
 }
@@ -296,18 +354,21 @@ form {
 .register-btn:hover {
   transform: scale(1.05);
 }
-@media (min-width: 700px) {
-  form {
-    max-width: 600px;
+@media (max-width: 700px) {
+  .form-container {
+    width: 600px;
+  }
+  .stack__form {
+    display: block;
   }
 }
 @media (max-width: 500px) {
-  form {
+  .form-container {
     width: 400px;
   }
 }
 @media (max-width: 400px) {
-  form {
+  .form-container {
     width: 320px;
     min-width: 300px;
   }
