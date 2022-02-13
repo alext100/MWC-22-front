@@ -42,11 +42,21 @@ describe("When the action setTechSector is invoked", () => {
 });
 
 describe("When the action setTechSkills is invoked", () => {
-  test("Then it should invoke commit with 'setTechSkills'  and received data", async () => {
+  test("Then it should invoke commit with 'setTechSkills' and received data", async () => {
+    const profesionalSkills = ["HTML", "React"];
+
+    await actions.setTechSkills(configActionContext(commit), profesionalSkills);
+
+    expect(commit).toHaveBeenCalledWith("setTechSkills", profesionalSkills);
+  });
+});
+
+describe("When the action setProfesionalInfo is invoked", () => {
+  test("Then it should invoke commit with 'setCurrentUserProfesionalData' and received data", async () => {
     const profesionalInfo = ["HTML", "React"];
 
-    await actions.setTechSkills(configActionContext(commit), profesionalInfo);
+    await actions.setProfesionalInfo(configActionContext(commit), profesionalInfo);
 
-    expect(commit).toHaveBeenCalledWith("setTechSkills", profesionalInfo);
+    expect(commit).toHaveBeenCalledWith("setCurrentUserProfesionalData", profesionalInfo);
   });
 });
