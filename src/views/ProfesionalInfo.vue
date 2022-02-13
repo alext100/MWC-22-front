@@ -1,8 +1,9 @@
 <template>
   <div class="container register__form">
+    <h1>Tell us about your experience and knowledge</h1>
     <Form
       class="shadow"
-      @submit="handleCreate"
+      @submit="handleSaveProfesionalInfo"
       :validation-schema="schema"
       @invalid-submit="onInvalidSubmit"
     >
@@ -15,16 +16,20 @@
         success-message="Thank you!"
       />
 
+      <label for="techSector">Choose your sector</label>
       <Selector
+        name="techSector"
+        :value="techSector"
         :options="sectors"
-        placeholder="Choose your sector:"
+        placeholder="Sector:"
         :model-value="state.techSector"
         @update:modelValue="onUpdateSectorValue"
+        success-message="Thank you!"
       />
-
-      <!-- :visible-options="visibleOptions" -->
+      <label for="techSkills">Choose your skills</label>
       <vue-select
-        placeholder="Choose your skills:"
+        name="techSkills"
+        placeholder="Skills:"
         :options="skills"
         multiple
         taggable
@@ -36,7 +41,7 @@
       >
         <template #dropdown-item="{ option }">
           <template v-if="option.isConstructor">
-            <div style="font-weight: 600">{{ option.label }}</div>
+            <div style="font-weight: 700">{{ option.label }}</div>
           </template>
           <template v-else>
             <div style="color: #550685">{{ option.label }}</div>
@@ -74,19 +79,53 @@ export default defineComponent({
     const options = [
       {
         name: "Front",
-        methods: [{ name: "includes" }, { name: "forEach" }, { name: "flat" }],
+        skills: [
+          { name: "HTML (Hypertext Markup Language)" },
+          { name: "CSS (Cascading Style Sheets)" },
+          { name: "JavaScript" },
+          { name: "Angular.js" },
+          { name: "React.js" },
+          { name: "Vue.js" },
+          { name: "SCSS" },
+          { name: "SASS" },
+          { name: "LESS" },
+        ],
       },
       {
         name: "Back",
-        methods: [{ name: "padStart" }, { name: "padEnd" }, { name: "matchAll" }],
+        skills: [
+          { name: "MongoDB" },
+          { name: "Express.js" },
+          { name: "Node.js" },
+          { name: "MySQL" },
+          { name: "Apache" },
+          { name: "PHP" },
+        ],
       },
       {
         name: "Mobile",
-        methods: [{ name: "all" }, { name: "any" }, { name: "race" }, { name: "allSettled" }],
+        skills: [
+          { name: "Kotlin" },
+          { name: "Java" },
+          { name: "Android Developer Tools (ADT)" },
+          { name: "Flutter" },
+          { name: "React Native" },
+          { name: "Swift" },
+          { name: "SQLite" },
+        ],
       },
       {
         name: "Data",
-        methods: [{ name: "zxc" }, { name: "asd" }, { name: "qwe" }, { name: "ert" }],
+        skills: [
+          { name: "Python" },
+          { name: "SQL" },
+          { name: "R" },
+          { name: "Scala" },
+          { name: "dplyr" },
+          { name: "Spark" },
+          { name: "PostgreSQL" },
+          { name: "tidyr" },
+        ],
       },
     ];
 
@@ -98,19 +137,13 @@ export default defineComponent({
           flat
             .concat({
               label: constructor.name,
-              value: constructor.methods.map((method) => method.name),
+              value: constructor.skills.map((skill) => skill.name),
               isConstructor: true,
             })
-            .concat(
-              constructor.methods.map((method) => ({ label: method.name, value: method.name }))
-            ),
+            .concat(constructor.skills.map((skill) => ({ label: skill.name, value: skill.name }))),
         []
       )
     );
-
-    /* const visibleOptions = computed(
-      () => skills.value.filter((skill) => skill.label === state.techSector[0])[0]?.value
-    ); */
 
     async function onUpdateSectorValue(value) {
       await dispatch("setTechSector", value);
@@ -130,7 +163,6 @@ export default defineComponent({
 
     const schema = Yup.object().shape({
       experience: Yup.number().min(0).max(50).required(),
-      techSector: Yup.array().of(Yup.string().required()),
     });
 
     return {
@@ -148,26 +180,28 @@ export default defineComponent({
 
   data() {
     return {
-      profesionalData: {
+      profesionalInfo: {
         experience: null,
+        techSector: null,
+        techSkills: null,
       },
       experience: "",
     };
   },
   methods: {
-    ...mapActions(["registerUser"]),
-    ...mapState(["isUserAuthenticated"]),
+    ...mapActions(["setProfesionalInfo"]),
+    ...mapState(["techSector", "techSkills"]),
 
-    handleCreate({ experience }) {
-      if (experience !== "") {
-        const userData = {
-          experience,
-        };
+    handleSaveProfesionalInfo({ experience }) {
+      const profesionalInfo = {
+        techSector: this.state.techSector,
+        techSkills: this.state.techSkills,
+        experience,
+      };
 
-        this.registerUser(userData);
-        if (this.isUserAuthenticated) {
-          this.$router.push("/profesional-info");
-        }
+      this.setProfesionalInfo(profesionalInfo);
+      if (this.state.profesionalInfo !== {}) {
+        this.$router.push("/profile");
       }
       this.experience = "";
     },
