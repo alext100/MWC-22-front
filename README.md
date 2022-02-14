@@ -76,3 +76,4 @@ Other card shows user profesional info with cards for show sectros and skills.
 ---
 
 Some components was tested with jest
+- ![coverage](https://raw.githubusercontent.com/alext100/MWC-22-front/master/img/coverage.png)
