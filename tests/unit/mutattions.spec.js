@@ -67,4 +67,51 @@ describe("Given a store mutations", () => {
       expect(state.currentUser).toEqual(emptyUserData);
     });
   });
+
+  describe("When setCurrentUserProfesionalData receives a state and payload with user profesional data", () => {
+    test("Then currentUserProfesionalData in store should be equal to user profesional data", () => {
+      mockedState = state;
+      const receivedProfesionalData = {
+        experience: 1,
+        techSector: ["Back", "Front", "Mobile"],
+        techSkills: [
+          "HTML",
+          "SCSS",
+          "Kotlin",
+          "Java",
+          "Android Developer Tools (ADT)",
+          "Flutter",
+          "React Native",
+          "Swift",
+          "SQLite",
+        ],
+      };
+
+      mutations.setCurrentUserProfesionalData(state, receivedProfesionalData);
+
+      expect(state.currentUserProfesionalData).toEqual(receivedProfesionalData);
+    });
+  });
+
+  describe("When setTechSector receives a state and payload with user tech sector data", () => {
+    test("Then techSector in store should be equal to user tech sector data", () => {
+      mockedState = state;
+      const receivedSectorData = ["Back", "Front", "Mobile"];
+
+      mutations.setTechSector(state, receivedSectorData);
+
+      expect(state.techSector).toEqual(receivedSectorData);
+    });
+  });
+
+  describe("When setTechSkills receives a state and payload with user tech skills data", () => {
+    test("Then techSkills in store should be equal to user tech skills data", () => {
+      mockedState = state;
+      const receivedSkillsData = ["Back", "Front", "Mobile"];
+
+      mutations.setTechSkills(state, receivedSkillsData);
+
+      expect(state.techSkills).toEqual(receivedSkillsData);
+    });
+  });
 });
