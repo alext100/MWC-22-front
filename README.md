@@ -2,8 +2,6 @@
 
 User stories / Objetivos
 
-Deploy: https://mvc-22-front-turchenko-alex.netlify.app/
-
 ✅ Task 1 → Formulario que permita introducir los siguientes datos: correo electrónico, nombre completo, breve descripción, país y ciudad de residencia.
 
 - Components:
@@ -76,4 +74,10 @@ Other card shows user profesional info with cards for show sectros and skills.
 ---
 
 Some components was tested with jest
-- ![coverage](https://raw.githubusercontent.com/alext100/MWC-22-front/master/img/coverage.png)
+  ![coverage](https://raw.githubusercontent.com/alext100/MWC-22-front/master/img/coverage.png)
+
+![res1](https://user-images.githubusercontent.com/83639312/158173998-e4edf1a1-ae1e-4092-8a7b-b5f99a48a291.png)
+
+![res2](https://user-images.githubusercontent.com/83639312/158174014-99dc522d-1a9e-4beb-b95e-49e74f1f1103.png)
+
+![res3](https://user-images.githubusercontent.com/83639312/158174025-0e58309f-c2a6-42d6-af8f-982d27304d57.png)
